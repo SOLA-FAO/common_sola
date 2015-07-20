@@ -1,0 +1,147 @@
+    
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.flossola.common</groupId>
+    <artifactId>sola-common-main</artifactId>
+    <version>1507a</version>
+    <packaging>pom</packaging>
+    <name>Common Main POM</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+    </properties>
+
+    <modules>
+        <module>geotools-ui</module>
+        <module>ejb-cache</module>
+        <module>services</module>
+        <module>swing</module>
+        <module>utilities</module>
+        <module>messaging</module>
+    </modules>
+    <!-- Configure common repositories available to all projects -->
+    <repositories>
+        <repository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <name>java.net</name>
+            <id>java.net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jboss-public-repository-group</id>
+            <name>JBoss Public Maven Repository Group</name>
+            <url>https://repository.jboss.org/nexus/content/groups/public</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>mc-release</id>
+            <name>Local Maven repository of releases</name>
+            <url>http://mc-repo.googlecode.com/svn/maven2/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </pluginRepository>
+    </pluginRepositories>
+    <organization>
+        <name>Solutions for Open Land Adminisration</name>
+        <url>http://www.flossola.org</url>
+    </organization>
+       
+    <dependencies>
+        <dependency>
+            <!-- Junit to be used by all projects -->
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <!-- Default compiler plugin targeting Java 6 -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.9.0</version>
+                <configuration>
+                    <header>./licenses/BSD3-lic.txt</header>
+                    <includes>
+                        <include>**/*.java</include>                       
+                    </includes>
+
+                    <excludes>
+                        <exclude>**/DateUtility.java</exclude>
+                        <exclude>**/Money.java</exclude>  
+                        <exclude>**/UnZip.java</exclude> 
+                        <exclude>**/JMapPane.java</exclude> 
+                        <exclude>**/JCoordsStatusBarItem.java</exclude> 
+                        <exclude>**/JMapStatusBar.java</exclude> 
+                        <exclude>**/JRendererStatusBarItem.java</exclude>
+                        <exclude>**/FindAccessory.java</exclude>
+                        <!--exclude>**/*.xsd</exclude--> 
+                    </excludes>
+                    <strictCheck>true</strictCheck>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <skipExistingHeaders>false</skipExistingHeaders>
+
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
+    <profiles>
+        <profile> 
+            <id>maven-release</id>
+            <!-- See http://central.sonatype.org/pages/apache-maven.html -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+               
+            </build>
+        </profile>
+    </profiles>
+</project>
